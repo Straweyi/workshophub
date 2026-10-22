@@ -113,7 +113,7 @@ const B2B_TESTIMONIALS = [
     author: 'Karina W.',
     role: 'People & Culture Manager',
     company: 'Tech Enterprise Jakarta',
-    pax: '45 Peserta',
+    pax: '46 Peserta',
   },
   {
     quote: 'Kolaborasi Straweyi untuk media gathering kami berjalan sukses besar. Craft kit yang disiapkan sangat premium dengan branding logo kami yang rapi. Tamu-tamu VIP sangat terkesan!',
