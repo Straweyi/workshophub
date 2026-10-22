@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import { motion } from 'motion/react'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import { Menu, X } from 'lucide-react'
 import { captureSource } from '@/lib/store'
 import { cn } from '@/lib/utils'
 
@@ -19,22 +20,55 @@ export function Logo({ className }: { className?: string }) {
 
 export default function Layout() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0); captureSource() }, [pathname])
+  const [open, setOpen] = useState(false)
+  useEffect(() => { window.scrollTo(0, 0); captureSource(); setOpen(false) }, [pathname])
 
   const link = ({ isActive }: { isActive: boolean }) =>
     cn('rounded-full px-4 py-2 text-sm font-medium transition hover:bg-sand', isActive && 'bg-ink text-cream hover:bg-ink')
+  const mobileLink = ({ isActive }: { isActive: boolean }) =>
+    cn('block rounded-2xl px-4 py-3.5 text-base font-semibold transition active:bg-sand', isActive ? 'bg-ink text-cream' : 'hover:bg-sand')
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 border-b border-line/70 bg-cream/80 backdrop-blur-xl print:hidden">
-        <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-5">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-18 sm:px-5">
           <Link to="/" aria-label="Straweyi Workshop Hub home"><Logo /></Link>
-          <nav className="flex items-center gap-1.5" aria-label="Main">
+          <nav className="hidden items-center gap-1.5 md:flex" aria-label="Main">
             <NavLink to="/" end className={link}>Workshops</NavLink>
             <NavLink to="/about" className={link}>About Me</NavLink>
             <NavLink to="/corporate" className={link}>Corporate & Private</NavLink>
           </nav>
+          <button
+            id="mobile-menu-toggle"
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((v) => !v)}
+            className="grid size-11 cursor-pointer place-items-center rounded-full border border-line bg-paper transition active:scale-95 md:hidden"
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
         </div>
+        <AnimatePresence>
+          {open && (
+            <motion.nav
+              id="mobile-nav"
+              aria-label="Mobile"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden border-t border-line/70 bg-cream md:hidden"
+            >
+              <div className="space-y-1 px-4 py-3">
+                <NavLink to="/" end className={mobileLink}>Workshops</NavLink>
+                <NavLink to="/about" className={mobileLink}>About Me</NavLink>
+                <NavLink to="/corporate" className={mobileLink}>Corporate & Private</NavLink>
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
 
       <motion.main key={pathname} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: 'easeOut' }} className="flex-1">
@@ -42,7 +76,7 @@ export default function Layout() {
       </motion.main>
 
       <footer className="mt-24 border-t border-line bg-sand/50 print:hidden">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-10 sm:flex-row sm:items-center">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-10 sm:flex-row sm:items-center sm:px-5">
           <div>
             <Logo />
             <p className="mt-2 max-w-sm text-sm text-muted">

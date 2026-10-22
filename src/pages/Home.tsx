@@ -13,7 +13,7 @@ function FollowBox() {
   const [cat, setCat] = useState<Category | 'All'>('All')
   const [done, setDone] = useState(false)
   return (
-    <section id="follow" className="relative overflow-hidden rounded-[2rem] bg-ink p-8 text-cream sm:p-12">
+    <section id="follow" className="relative overflow-hidden rounded-[1.5rem] bg-ink p-6 text-cream sm:rounded-[2rem] sm:p-12">
       <div className="absolute -right-16 -top-16 size-64 rounded-full bg-terra/40 blur-3xl" />
       <div className="relative grid items-center gap-8 md:grid-cols-2">
         <div>
@@ -55,7 +55,7 @@ function Testimonials() {
     <section aria-labelledby="testimonials-heading">
       <div className="mb-8 text-center">
         <Badge variant="terra" className="mb-3"><Heart className="size-3" /> Kata mereka</Badge>
-        <h2 id="testimonials-heading" className="text-4xl font-semibold">Peserta bicara.</h2>
+        <h2 id="testimonials-heading" className="text-3xl font-semibold sm:text-4xl">Peserta bicara.</h2>
         <p className="mt-2 text-muted">Lebih dari 200 karya sudah lahir dari tangan-tangan peserta Straweyi.</p>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -122,15 +122,15 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-14 md:grid-cols-[1.1fr_1fr] md:pt-20">
+      <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 pb-12 pt-8 sm:px-5 sm:pb-16 md:grid-cols-[1.1fr_1fr] md:gap-12 md:pt-20">
         <div>
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
             <Badge variant="terra" className="mb-5"><Sparkles className="size-3" /> Registration open · Nov–Dec 2026</Badge>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="text-5xl font-bold leading-[1.02] sm:text-6xl lg:text-7xl">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="text-4xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
             Make something <em className="text-terra not-italic">beautiful</em> with your hands.
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-6 max-w-lg text-lg text-muted">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-5 max-w-lg text-base text-muted sm:mt-6 sm:text-lg">
             Browse every upcoming Straweyi workshop, see price, place and seats left, then book in under a minute. No account, no DM.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-8 flex flex-wrap gap-3">
@@ -143,26 +143,26 @@ export default function Home() {
             <li className="flex items-center gap-2"><Ticket className="size-4 text-sage-dark" />Live seat count</li>
           </motion.ul>
         </div>
-        <div className="relative mx-auto h-[26rem] w-full max-w-md">
-          <motion.img initial={{ opacity: 0, scale: 0.9, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: -4 }} transition={{ delay: 0.2, type: 'spring' }} src="/img/crochet-bag.jpg" alt="Crocheting a striped tote bag" className="absolute left-0 top-0 h-64 w-60 rounded-[2rem] border-4 border-paper object-cover shadow-lift" />
-          <motion.img initial={{ opacity: 0, scale: 0.9, rotate: 8 }} animate={{ opacity: 1, scale: 1, rotate: 5 }} transition={{ delay: 0.35, type: 'spring' }} src="/img/amigurumi.jpg" alt="Amigurumi bear and bunny" className="floaty absolute right-0 top-16 h-60 w-52 rounded-[2rem] border-4 border-paper object-cover shadow-lift" />
-          <motion.img initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, type: 'spring' }} src="/img/macrame.jpg" alt="Macramé workshop" className="absolute bottom-0 left-12 h-48 w-64 rounded-[2rem] border-4 border-paper object-cover shadow-lift" />
+        <div className="relative mx-auto h-[20rem] w-full max-w-md sm:h-[26rem]">
+          <motion.img initial={{ opacity: 0, scale: 0.9, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: -4 }} transition={{ delay: 0.2, type: 'spring' }} src="/img/crochet-bag.jpg" alt="Crocheting a striped tote bag" className="absolute left-0 top-0 h-48 w-44 rounded-[1.5rem] border-4 border-paper object-cover shadow-lift sm:h-64 sm:w-60 sm:rounded-[2rem]" />
+          <motion.img initial={{ opacity: 0, scale: 0.9, rotate: 8 }} animate={{ opacity: 1, scale: 1, rotate: 5 }} transition={{ delay: 0.35, type: 'spring' }} src="/img/amigurumi.jpg" alt="Amigurumi bear and bunny" className="floaty absolute right-0 top-12 h-44 w-40 rounded-[1.5rem] border-4 border-paper object-cover shadow-lift sm:top-16 sm:h-60 sm:w-52 sm:rounded-[2rem]" />
+          <motion.img initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, type: 'spring' }} src="/img/macrame.jpg" alt="Macramé workshop" className="absolute bottom-0 left-6 h-36 w-48 rounded-[1.5rem] border-4 border-paper object-cover shadow-lift sm:left-12 sm:h-48 sm:w-64 sm:rounded-[2rem]" />
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8, type: 'spring' }}
-            className="absolute bottom-6 right-2 grid size-24 rotate-12 place-items-center rounded-full bg-mustard text-center font-display text-sm font-bold leading-tight text-ink shadow-lift"
+            className="absolute bottom-4 right-1 grid size-20 rotate-12 place-items-center rounded-full bg-mustard text-center font-display text-xs font-bold leading-tight text-ink shadow-lift sm:bottom-6 sm:right-2 sm:size-24 sm:text-sm"
           >
             Next<br />workshop<br />{nextDateFormatted}
           </motion.div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl space-y-20 px-5">
+      <div className="mx-auto max-w-6xl space-y-14 px-4 sm:space-y-20 sm:px-5">
         <section id="workshops" className="scroll-mt-24">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-4xl font-semibold">Upcoming workshops</h2>
+              <h2 className="text-3xl font-semibold sm:text-4xl">Upcoming workshops</h2>
               <p className="mt-1 text-muted">{list.length} of {published.length} workshops</p>
             </div>
             <div className="flex rounded-full border border-line bg-paper p-1" role="tablist">
@@ -256,7 +256,7 @@ export default function Home() {
         <Testimonials />
 
         {/* Corporate & Private B2B Teaser Banner */}
-        <section className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-paper via-sand/30 to-blush/40 p-8 sm:p-12 shadow-soft">
+        <section className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-paper via-sand/30 to-blush/40 p-6 shadow-soft sm:p-12">
           <div className="grid items-center gap-6 md:grid-cols-[1.4fr_1fr]">
             <div>
               <Badge variant="terra" className="mb-3">
@@ -268,13 +268,13 @@ export default function Home() {
               <p className="mt-2 text-sm text-muted leading-relaxed">
                 Dipercaya oleh 170+ brand ternama (BCA, Shopee, TikTok, Bank Mandiri, US Embassy). Lengkap dengan instruktur berpengalaman, materi premium, dan live price simulator instan.
               </p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="bg-terra text-white hover:bg-terra-dark shadow-soft">
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Button asChild size="lg" className="h-auto w-full whitespace-normal bg-terra py-3.5 text-center text-white shadow-soft hover:bg-terra-dark sm:w-auto">
                   <Link to="/corporate">
                     Simulasi Biaya & Dapatkan Penawaran Resmi
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" variant="outline" className="h-auto w-full whitespace-normal py-3.5 text-center sm:w-auto">
                   <Link to="/about">
                     Lihat 170+ Portofolio Kolaborasi
                   </Link>

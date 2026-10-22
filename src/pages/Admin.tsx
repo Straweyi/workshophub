@@ -28,9 +28,9 @@ const statusVariant: Record<RegStatus, 'sage' | 'mustard' | 'dark' | 'terra' | '
 function Kpi({ label, value, hint, delay }: { label: string; value: string; hint: string; delay: number }) {
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
-      <Card className="p-5">
+      <Card className="p-4 sm:p-5">
         <div className="text-xs font-semibold uppercase tracking-wider text-muted">{label}</div>
-        <div className="mt-2 font-display text-3xl font-bold">{value}</div>
+        <div className="mt-2 break-words font-display text-2xl font-bold sm:text-3xl">{value}</div>
         <div className="mt-1 text-xs text-muted">{hint}</div>
       </Card>
     </motion.div>
@@ -79,13 +79,13 @@ function EditModal({ w, onClose }: { w: Workshop; onClose: () => void }) {
         exit={{ opacity: 0, scale: 0.96 }}
         className="w-full max-w-2xl rounded-3xl bg-paper shadow-lift"
       >
-        <div className="flex items-center justify-between border-b border-line px-7 py-5">
+        <div className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-7 sm:py-5">
           <h3 className="text-xl font-semibold">Edit workshop</h3>
           <button onClick={onClose} className="grid size-9 cursor-pointer place-items-center rounded-full hover:bg-sand">
             <X className="size-5" />
           </button>
         </div>
-        <form id="edit-form" onSubmit={submit} className="grid gap-4 p-7 md:grid-cols-2">
+        <form id="edit-form" onSubmit={submit} className="grid gap-4 p-5 sm:p-7 md:grid-cols-2">
           <div className="md:col-span-2">
             <Label htmlFor="e-title">Title</Label>
             <Input id="e-title" required value={f.title} onChange={(e) => set('title', e.target.value)} />
@@ -170,7 +170,7 @@ function Overview({ onEdit }: { onEdit: (w: Workshop) => void }) {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
         <Kpi delay={0} label="Seats booked" value={String(seats)} hint={`${live.length} bookings`} />
         <Kpi delay={0.05} label="Revenue paid" value={rupiah(revenue)} hint={`${paid.length} paid bookings`} />
         <Kpi delay={0.1} label="Visit to booking" value={conv.toFixed(1) + '%'} hint={`${s.views.length} page views`} />
@@ -178,7 +178,7 @@ function Overview({ onEdit }: { onEdit: (w: Workshop) => void }) {
         <Kpi delay={0.2} label="Attendance" value={attend.toFixed(0) + '%'} hint="checked in / paid" />
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <h3 className="text-xl font-semibold">Which channels bring people in?</h3>
         <p className="mb-5 text-sm text-muted">
           Tag links with ?src=name to track a campaign, e.g. ?src=instagram.
@@ -211,7 +211,7 @@ function Overview({ onEdit }: { onEdit: (w: Workshop) => void }) {
         </div>
       </Card>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <h3 className="mb-5 text-xl font-semibold">Workshops</h3>
         <div className="space-y-4">
           {s.workshops.map((w) => {
@@ -280,11 +280,11 @@ function Registrations() {
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-xl font-semibold">{rows.length} registrations</h3>
-        <div className="flex gap-2">
-          <Select aria-label="Filter by workshop" value={wid} onChange={(e) => setWid(e.target.value)} className="h-10 w-56">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+          <Select aria-label="Filter by workshop" value={wid} onChange={(e) => setWid(e.target.value)} className="h-10 w-full sm:w-56">
             <option value="">All workshops</option>
             {s.workshops.map((w) => <option key={w.id} value={w.id}>{w.title}</option>)}
           </Select>
@@ -410,7 +410,7 @@ function CheckIn() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
       <div className="space-y-6">
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h3 className="text-xl font-semibold">QR Ticket Check-In</h3>
@@ -573,7 +573,7 @@ function CheckIn() {
 
         {/* Recently checked in */}
         {recentCheckedIn.length > 0 && (
-          <Card className="p-6">
+          <Card className="p-4 sm:p-6">
             <h4 className="text-base font-semibold text-ink">Baru Saja Check-In</h4>
             <div className="mt-3 space-y-2">
               {recentCheckedIn.map((r) => (
@@ -597,7 +597,7 @@ function CheckIn() {
       </div>
 
       {/* Right Column: Paid attendees not yet arrived */}
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">Peserta Belum Hadir</h3>
           <Badge variant="mustard">{notArrived.length} orang</Badge>
@@ -662,7 +662,7 @@ function Create({ onDone }: { onDone: () => void }) {
   const set = (k: string, v: string | number) => setF((p) => ({ ...p, [k]: v }))
   const images: Record<Category, string> = { Crochet: '/img/crochet-bag.jpg', Knitting: '/img/knitting.jpg', Amigurumi: '/img/amigurumi.jpg', Macrame: '/img/macrame.jpg' }
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6">
       <h3 className="mb-5 text-xl font-semibold">Publish a new workshop</h3>
       <form
         id="create-form"
@@ -693,7 +693,7 @@ function Create({ onDone }: { onDone: () => void }) {
 function Outbox() {
   const s = useStore()
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6">
       <h3 className="text-xl font-semibold">Email outbox</h3>
       <p className="mb-4 text-sm text-muted">Simulated emails (confirmations, follower alerts, waitlist offers). Connect an email provider to send them for real.</p>
       {s.mails.length === 0 && <p className="py-8 text-center text-muted">Nothing sent yet. Make a booking or follow a category.</p>}
@@ -833,7 +833,7 @@ function CorporateLeads() {
   return (
     <div className="space-y-6">
       {/* KPI Cards */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
         <Card className="p-5">
           <div className="text-xs font-semibold uppercase tracking-wider text-muted">Total Leads B2B</div>
           <div className="mt-2 font-display text-3xl font-bold">{list.length}</div>
@@ -852,13 +852,13 @@ function CorporateLeads() {
       </div>
 
       {/* Filter and Table Card */}
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
           <div>
             <h3 className="text-xl font-bold text-ink">Daftar Permintaan Corporate & Private Workshop</h3>
             <p className="text-xs text-muted mt-0.5">Kelola prospek kolaborasi, status penawaran, dan kontak PIC</p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
             <Button
               size="sm"
               onClick={() => setShowAddModal(true)}
@@ -870,12 +870,12 @@ function CorporateLeads() {
               placeholder="Cari perusahaan / PIC…"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              className="h-9 w-44 text-xs"
+              className="h-9 w-full text-xs sm:w-44"
             />
             <Select
               value={filter}
               onChange={(e) => setFilter(e.target.value as CorporateStatus | 'all')}
-              className="h-9 w-40 text-xs"
+              className="h-9 w-full text-xs sm:w-40"
             >
               <option value="all">Semua Status ({list.length})</option>
               <option value="new">Permintaan Baru</option>
@@ -957,12 +957,12 @@ function CorporateLeads() {
 
                   {/* Actions Bar */}
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex w-full items-center gap-2 sm:w-auto">
                       <span className="text-xs text-muted font-medium">Ubah Status:</span>
                       <Select
                         value={item.status}
                         onChange={(e) => handleStatusChange(item.id, e.target.value as CorporateStatus)}
-                        className="h-8 text-xs py-0 w-44"
+                        className="h-8 w-full py-0 text-xs sm:w-44"
                       >
                         <option value="new">Permintaan Baru</option>
                         <option value="contacted">Sudah Dihubungi</option>
@@ -1024,7 +1024,7 @@ function CorporateLeads() {
       {/* Quotation Sheet Modal within Admin */}
       <AnimatePresence>
         {viewingQuotation && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-ink/60 p-4 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/60 p-3 backdrop-blur-sm sm:items-center sm:p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -1110,7 +1110,7 @@ function CorporateLeads() {
       {/* Manual Lead Creation Modal */}
       <AnimatePresence>
         {showAddModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-ink/60 p-4 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/60 p-3 backdrop-blur-sm sm:items-center sm:p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -1182,11 +1182,11 @@ export default function Admin() {
   const [editing, setEditing] = useState<Workshop | null>(null)
   const newCorpCount = (useStore().corporateRequests || []).filter((r) => r.status === 'new').length
   return (
-    <div className="mx-auto max-w-6xl px-5 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-5 sm:py-10">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <Badge variant="dark" className="mb-3">Organizer dashboard</Badge>
-          <h1 className="text-4xl font-bold">Studio control room</h1>
+          <h1 className="text-3xl font-bold sm:text-4xl">Studio control room</h1>
           <p className="mt-1 text-muted">Signed in as organizer. Live data from Supabase.</p>
         </div>
         <div className="flex gap-2">
@@ -1198,12 +1198,12 @@ export default function Admin() {
           )}
         </div>
       </div>
-      <div className="mb-8 flex flex-wrap gap-2" role="tablist">
+      <div className="-mx-4 mb-6 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:mb-8 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0" role="tablist">
         {TABS.map(([k, label, Icon]) => (
           <button
             key={k} id={`tab-${k}`} role="tab" aria-selected={tab === k}
             onClick={() => setTab(k)}
-            className={cn('flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition',
+            className={cn('flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2.5 text-sm font-semibold transition sm:py-2',
               tab === k ? 'border-ink bg-ink text-cream' : 'border-line bg-paper hover:bg-sand')}
           >
             <Icon className="size-4" />

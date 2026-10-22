@@ -876,7 +876,7 @@ Mohon informasi ketersediaan jadwal & pengiriman quotation resmi. Terima kasih!`
         </div>
 
         {/* Right Column: Live Sticky Summary, Real-time Mockup & Contact Form */}
-        <div className="sticky top-24 space-y-6">
+        <div className="space-y-6 lg:sticky lg:top-24">
 
           {/* Live Personalized Merchandise Mockup Preview */}
           <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }}>

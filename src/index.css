@@ -21,7 +21,10 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: clip; }
+  img, svg, video { max-width: 100%; }
+  button, a { -webkit-tap-highlight-color: transparent; }
   body {
     @apply bg-cream text-ink font-sans antialiased;
     background-image:
@@ -31,6 +34,11 @@
   }
   h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.015em; }
   ::selection { background: var(--color-blush); }
+}
+
+/* iOS Safari zooms the page when focusing inputs smaller than 16px */
+@media (max-width: 639px) {
+  input:not([type='checkbox']):not([type='radio']), select, textarea { font-size: 16px; }
 }
 
 .grain::after {
